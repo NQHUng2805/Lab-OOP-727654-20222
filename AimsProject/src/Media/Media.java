@@ -1,37 +1,93 @@
+
+package AimsProject.Media;
+
+import java.util.Comparator;
+import java.util.Objects;
+import AimsProject.Comparator.MediaComparatorByCostTitle;
+import AimsProject.Comparator.MediaComparatorByTittlitle;
 public abstract class Media {
-   private int id;
-   private String title;
-   private String category;
-   private float cost;
-   private List<String> authors = new ArrayList<String>();
+    
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTittleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 
-   public int getId(){
-      return id;
-   }
-   public void setId(float id){
-          this.id = id;
-   }
+    private static int mediactr = 0;
+    private int id;
+    private String title;
+    private String category;
+    private float cost;
 
-   public String getTitle(){
-      return title;
-   }
-   public void setTitle(String title){
-          this.title = title;
-   }
+    public Media() {
+    }
 
-   public String getCategory(){
-      return category;
-   }
-   public void setCategory(String category){
-          this.category = category;
-   }
+    public Media(String title) {
+        ++mediactr;
+        this.id = mediactr;
+        this.title = title;
+    }
 
-   public float getCost(){
-      return cost;
-   }
-   public void setCost(float cost){
-          this.cost = cost;
-   }
+    public Media(String title, String category) {
+        ++mediactr;
+        this.id = mediactr;
+        this.title = title;
+        this.category = category;
+    }
 
-   public Media() {
-   }
+    public Media(String title, String category, float cost) {
+        ++mediactr;
+        this.id = mediactr;
+        this.title = title;
+        this.category = category;
+        this.cost = cost;
+    }
+
+    //getters
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    //setters
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCost(float cost) {
+        this.cost = cost;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    //equals
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof Media tmp) {
+            return tmp.title.equals(this.title);
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+}
