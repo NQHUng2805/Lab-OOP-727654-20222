@@ -8,7 +8,7 @@ public class Book extends media{
             }
    }
 
-   public void addAuthor(String AuthorName){ 
+   public void removeAuthor(String AuthorName){ 
             if (this.authors.contains(authorName)) {
                 this.authors.remove(authorName);
             }
